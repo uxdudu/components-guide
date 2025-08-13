@@ -309,6 +309,375 @@ const componentsData = {
       "type conflitando com role"
     ]
   }
+  },
+  "Accordion": {
+    "description": "Organiza conteúdo em seções expansíveis e colapsáveis.",
+    "figmaTips": [
+      "Use auto-layout vertical para items",
+      "Variants para isExpanded e hasIcon",
+      "Boolean para isDisabled e allowMultiple"
+    ],
+    "props": {
+      "variant": {
+        "type": "enum",
+        "options": ["default", "bordered", "separated"],
+        "default": "default",
+        "category": "aesthetic"
+      },
+      "size": {
+        "type": "enum",
+        "options": ["sm", "md", "lg"],
+        "default": "md",
+        "category": "other"
+      },
+      "isExpanded": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "isDisabled": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "hasIcon": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      },
+      "allowMultiple": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "isExpanded para controle de estado",
+      "allowMultiple para comportamento semântico",
+      "hasIcon para mostrar/ocultar indicadores"
+    ],
+    "antiPatterns": [
+      "open='true'|'false' em string",
+      "expanded em vez de isExpanded",
+      "Props conflitantes para mesmo estado"
+    ]
+  },
+  "Avatar": {
+    "description": "Representa usuários com imagem, iniciais ou ícone placeholder.",
+    "figmaTips": [
+      "Variants para size e shape",
+      "Boolean para hasImage e hasBadge",
+      "Status como enum semântico"
+    ],
+    "props": {
+      "size": {
+        "type": "enum",
+        "options": ["xs", "sm", "md", "lg", "xl"],
+        "default": "md",
+        "category": "other"
+      },
+      "shape": {
+        "type": "enum",
+        "options": ["circle", "square", "rounded"],
+        "default": "circle",
+        "category": "aesthetic"
+      },
+      "status": {
+        "type": "enum",
+        "options": ["none", "online", "offline", "away", "busy"],
+        "default": "none",
+        "category": "semantic"
+      },
+      "hasImage": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      },
+      "hasBadge": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "isClickable": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "status para significado semântico",
+      "hasImage para controle de conteúdo",
+      "isClickable para comportamento"
+    ],
+    "antiPatterns": [
+      "color='green' para status online",
+      "clickable='true' em string",
+      "Misturar aparência com estado"
+    ]
+  },
+  "Dialog": {
+    "description": "Modal que interrompe o fluxo para capturar atenção do usuário.",
+    "figmaTips": [
+      "Overlay como componente separado",
+      "Boolean para isOpen e hasCloseButton",
+      "Size para controle de largura"
+    ],
+    "props": {
+      "size": {
+        "type": "enum",
+        "options": ["sm", "md", "lg", "xl", "full"],
+        "default": "md",
+        "category": "other"
+      },
+      "intent": {
+        "type": "enum",
+        "options": ["default", "destructive", "warning", "success"],
+        "default": "default",
+        "category": "semantic"
+      },
+      "isOpen": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "hasCloseButton": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      },
+      "hasOverlay": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      },
+      "isClosableOnOverlay": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "isOpen para controle de visibilidade",
+      "intent para propósito semântico",
+      "Booleans claros para comportamento"
+    ],
+    "antiPatterns": [
+      "visible='true'|'false' em string",
+      "type='alert'|'red' misturado",
+      "Props conflitantes para fechamento"
+    ]
+  },
+  "Menu": {
+    "description": "Lista de ações ou navegação em dropdown ou contexto.",
+    "figmaTips": [
+      "Auto-layout vertical para items",
+      "Variants para trigger e placement",
+      "Boolean para isOpen e hasIcons"
+    ],
+    "props": {
+      "trigger": {
+        "type": "enum",
+        "options": ["click", "hover", "contextmenu"],
+        "default": "click",
+        "category": "semantic"
+      },
+      "placement": {
+        "type": "enum",
+        "options": ["bottom", "top", "left", "right", "bottom-start", "bottom-end"],
+        "default": "bottom",
+        "category": "other"
+      },
+      "size": {
+        "type": "enum",
+        "options": ["sm", "md", "lg"],
+        "default": "md",
+        "category": "other"
+      },
+      "isOpen": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "hasIcons": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "hasArrow": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "trigger para comportamento semântico",
+      "placement para posicionamento",
+      "isOpen para controle de estado"
+    ],
+    "antiPatterns": [
+      "show='true'|'false' em string",
+      "position='bottom'|'red' misturado",
+      "Props conflitantes para trigger"
+    ]
+  },
+  "Tabs": {
+    "description": "Organiza conteúdo relacionado em painéis navegáveis.",
+    "figmaTips": [
+      "TabList e TabPanel como componentes",
+      "Variants para orientation e variant",
+      "Boolean para isDisabled por tab"
+    ],
+    "props": {
+      "variant": {
+        "type": "enum",
+        "options": ["line", "enclosed", "soft-rounded", "solid-rounded"],
+        "default": "line",
+        "category": "aesthetic"
+      },
+      "orientation": {
+        "type": "enum",
+        "options": ["horizontal", "vertical"],
+        "default": "horizontal",
+        "category": "other"
+      },
+      "size": {
+        "type": "enum",
+        "options": ["sm", "md", "lg"],
+        "default": "md",
+        "category": "other"
+      },
+      "isFitted": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "hasIcons": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "isLazy": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "variant para estilo visual",
+      "orientation para layout semântico",
+      "isFitted para comportamento de largura"
+    ],
+    "antiPatterns": [
+      "style='pills'|'blue' misturado",
+      "direction em vez de orientation",
+      "Props conflitantes para layout"
+    ]
+  },
+  "Tags": {
+    "description": "Rótulos para categorização, filtragem ou metadata.",
+    "figmaTips": [
+      "Similar ao Chip mas focado em categorização",
+      "Variants para scheme e size",
+      "Boolean para isRemovable e isClickable"
+    ],
+    "props": {
+      "scheme": {
+        "type": "enum",
+        "options": ["default", "primary", "secondary", "success", "warning", "error"],
+        "default": "default",
+        "category": "semantic"
+      },
+      "variant": {
+        "type": "enum",
+        "options": ["subtle", "solid", "outline"],
+        "default": "subtle",
+        "category": "aesthetic"
+      },
+      "size": {
+        "type": "enum",
+        "options": ["sm", "md", "lg"],
+        "default": "md",
+        "category": "other"
+      },
+      "isRemovable": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "isClickable": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "isDisabled": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "scheme para significado semântico",
+      "variant para aparência visual",
+      "isRemovable para comportamento"
+    ],
+    "antiPatterns": [
+      "color='red' em vez de scheme='error'",
+      "removable='true' em string",
+      "Misturar semântica com estética"
+    ]
+  },
+  "Tooltip": {
+    "description": "Informação contextual que aparece ao hover ou foco.",
+    "figmaTips": [
+      "Placement como enum para posição",
+      "Boolean para hasArrow e isOpen",
+      "Trigger para comportamento"
+    ],
+    "props": {
+      "placement": {
+        "type": "enum",
+        "options": ["top", "bottom", "left", "right", "top-start", "top-end", "bottom-start", "bottom-end"],
+        "default": "top",
+        "category": "other"
+      },
+      "trigger": {
+        "type": "enum",
+        "options": ["hover", "focus", "click"],
+        "default": "hover",
+        "category": "semantic"
+      },
+      "variant": {
+        "type": "enum",
+        "options": ["default", "light", "dark"],
+        "default": "default",
+        "category": "aesthetic"
+      },
+      "isOpen": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      },
+      "hasArrow": {
+        "type": "boolean",
+        "default": true,
+        "category": "boolean"
+      },
+      "isDisabled": {
+        "type": "boolean",
+        "default": false,
+        "category": "boolean"
+      }
+    },
+    "goodPractices": [
+      "trigger para comportamento semântico",
+      "placement para posicionamento",
+      "isOpen para controle manual"
+    ],
+    "antiPatterns": [
+      "show='true'|'false' em string",
+      "position='top'|'blue' misturado",
+      "Props conflitantes para trigger"
+    ]
 };
 
 // Component states
@@ -512,6 +881,27 @@ function updateComponentPreview(componentName) {
     case 'Chip':
       previewHTML = createChipPreview(state);
       break;
+    case 'Accordion':
+      previewHTML = createAccordionPreview(state);
+      break;
+    case 'Avatar':
+      previewHTML = createAvatarPreview(state);
+      break;
+    case 'Dialog':
+      previewHTML = createDialogPreview(state);
+      break;
+    case 'Menu':
+      previewHTML = createMenuPreview(state);
+      break;
+    case 'Tabs':
+      previewHTML = createTabsPreview(state);
+      break;
+    case 'Tags':
+      previewHTML = createTagsPreview(state);
+      break;
+    case 'Tooltip':
+      previewHTML = createTooltipPreview(state);
+      break;
   }
   
   previewContainer.innerHTML = previewHTML;
@@ -634,6 +1024,171 @@ function createChipPreview(state) {
   const dismissButton = state.isDismissible ? ' <button style="background: none; border: none; margin-left: 4px; color: inherit;">×</button>' : '';
   
   return `<span class="${classes}" ${state.isDisabled ? 'disabled' : ''}>${text}${dismissButton}</span>`;
+}
+
+function createAccordionPreview(state) {
+  const classes = [
+    'dynamic-accordion',
+    `dynamic-accordion--${state.variant}`,
+    `dynamic-accordion--${state.size}`
+  ].filter(Boolean).join(' ');
+  
+  const headerClasses = [
+    'dynamic-accordion__header',
+    state.isExpanded ? 'dynamic-accordion__header--expanded' : '',
+    state.isDisabled ? 'dynamic-accordion__header--disabled' : ''
+  ].filter(Boolean).join(' ');
+  
+  const icon = state.hasIcon ? '<span class="dynamic-accordion__icon">▼</span>' : '';
+  const content = state.isExpanded ? '<div class="dynamic-accordion__content">Conteúdo do accordion expandido</div>' : '';
+  
+  return `
+    <div class="${classes}">
+      <div class="${headerClasses}">
+        ${icon}
+        <span>Item do Accordion</span>
+      </div>
+      ${content}
+    </div>
+  `;
+}
+
+function createAvatarPreview(state) {
+  const classes = [
+    'dynamic-avatar',
+    `dynamic-avatar--${state.size}`,
+    `dynamic-avatar--${state.shape}`,
+    state.isClickable ? 'dynamic-avatar--clickable' : ''
+  ].filter(Boolean).join(' ');
+  
+  const content = state.hasImage ? 
+    '<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Avatar" />' :
+    '<span class="dynamic-avatar__initials">JD</span>';
+  
+  const badge = state.hasBadge && state.status !== 'none' ? 
+    `<span class="dynamic-avatar__badge dynamic-avatar__badge--${state.status}"></span>` : '';
+  
+  return `
+    <div class="${classes}">
+      ${content}
+      ${badge}
+    </div>
+  `;
+}
+
+function createDialogPreview(state) {
+  if (!state.isOpen) {
+    return '<button class="btn btn--primary btn--sm">Abrir Dialog</button>';
+  }
+  
+  const classes = [
+    'dynamic-dialog',
+    `dynamic-dialog--${state.size}`,
+    `dynamic-dialog--${state.intent}`
+  ].join(' ');
+  
+  const overlay = state.hasOverlay ? '<div class="dynamic-dialog__overlay"></div>' : '';
+  const closeButton = state.hasCloseButton ? '<button class="dynamic-dialog__close">×</button>' : '';
+  
+  return `
+    ${overlay}
+    <div class="${classes}">
+      <div class="dynamic-dialog__header">
+        <h3>Título do Dialog</h3>
+        ${closeButton}
+      </div>
+      <div class="dynamic-dialog__content">
+        Este é o conteúdo do dialog. Demonstra como as propriedades afetam a aparência.
+      </div>
+      <div class="dynamic-dialog__actions">
+        <button class="btn btn--outline btn--sm">Cancelar</button>
+        <button class="btn btn--primary btn--sm">Confirmar</button>
+      </div>
+    </div>
+  `;
+}
+
+function createMenuPreview(state) {
+  if (!state.isOpen) {
+    return '<button class="btn btn--outline btn--sm">Menu ▼</button>';
+  }
+  
+  const classes = [
+    'dynamic-menu',
+    `dynamic-menu--${state.size}`,
+    state.hasArrow ? 'dynamic-menu--arrow' : ''
+  ].filter(Boolean).join(' ');
+  
+  const iconPrefix = state.hasIcons ? '📄 ' : '';
+  
+  return `
+    <div style="position: relative; display: inline-block;">
+      <button class="btn btn--outline btn--sm">Menu ▼</button>
+      <div class="${classes}">
+        <div class="dynamic-menu__item">${iconPrefix}Item 1</div>
+        <div class="dynamic-menu__item">${iconPrefix}Item 2</div>
+        <div class="dynamic-menu__item">${iconPrefix}Item 3</div>
+      </div>
+    </div>
+  `;
+}
+
+function createTabsPreview(state) {
+  const classes = [
+    'dynamic-tabs',
+    `dynamic-tabs--${state.variant}`,
+    `dynamic-tabs--${state.orientation}`,
+    `dynamic-tabs--${state.size}`,
+    state.isFitted ? 'dynamic-tabs--fitted' : ''
+  ].filter(Boolean).join(' ');
+  
+  const iconPrefix = state.hasIcons ? '📋 ' : '';
+  
+  return `
+    <div class="${classes}">
+      <div class="dynamic-tabs__list">
+        <button class="dynamic-tabs__tab dynamic-tabs__tab--active">${iconPrefix}Tab 1</button>
+        <button class="dynamic-tabs__tab">${iconPrefix}Tab 2</button>
+        <button class="dynamic-tabs__tab">${iconPrefix}Tab 3</button>
+      </div>
+      <div class="dynamic-tabs__panel">
+        Conteúdo da aba ativa
+      </div>
+    </div>
+  `;
+}
+
+function createTagsPreview(state) {
+  const classes = [
+    'dynamic-tags',
+    `dynamic-tags--${state.scheme}`,
+    `dynamic-tags--${state.variant}`,
+    `dynamic-tags--${state.size}`,
+    state.isClickable ? 'dynamic-tags--clickable' : ''
+  ].filter(Boolean).join(' ');
+  
+  const removeButton = state.isRemovable ? ' <button style="background: none; border: none; margin-left: 4px; color: inherit;">×</button>' : '';
+  
+  return `<span class="${classes}" ${state.isDisabled ? 'disabled' : ''}>${state.scheme.charAt(0).toUpperCase() + state.scheme.slice(1)} Tag${removeButton}</span>`;
+}
+
+function createTooltipPreview(state) {
+  const tooltipClasses = [
+    'dynamic-tooltip',
+    `dynamic-tooltip--${state.variant}`,
+    `dynamic-tooltip--${state.placement}`,
+    state.hasArrow ? 'dynamic-tooltip--arrow' : ''
+  ].filter(Boolean).join(' ');
+  
+  const tooltip = state.isOpen ? 
+    `<div class="${tooltipClasses}">Este é um tooltip de exemplo</div>` : '';
+  
+  return `
+    <div style="position: relative; display: inline-block;">
+      <button class="btn btn--outline btn--sm">Hover para tooltip</button>
+      ${tooltip}
+    </div>
+  `;
 }
 
 // Generate TypeScript code

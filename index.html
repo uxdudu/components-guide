@@ -27,6 +27,13 @@
                     <button class="nav-tab" data-tab="toggle">Toggle</button>
                     <button class="nav-tab" data-tab="card">Card</button>
                     <button class="nav-tab" data-tab="chip">Chip</button>
+                    <button class="nav-tab" data-tab="accordion">Accordion</button>
+                    <button class="nav-tab" data-tab="avatar">Avatar</button>
+                    <button class="nav-tab" data-tab="dialog">Dialog</button>
+                    <button class="nav-tab" data-tab="menu">Menu</button>
+                    <button class="nav-tab" data-tab="tabs">Tabs</button>
+                    <button class="nav-tab" data-tab="tags">Tags</button>
+                    <button class="nav-tab" data-tab="tooltip">Tooltip</button>
                 </div>
             </div>
         </nav>
@@ -119,6 +126,78 @@
                                     <p>Role define comportamento, appearance define estilo</p>
                                     <div class="component-preview">
                                         <span class="preview-chip">Filter</span>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="accordion">
+                                    <h3>Accordion</h3>
+                                    <p>Seções expansíveis com controle de estado</p>
+                                    <div class="component-preview">
+                                        <div class="preview-accordion">
+                                            <div class="preview-accordion__header">▼ Seção</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="avatar">
+                                    <h3>Avatar</h3>
+                                    <p>Representação visual de usuários</p>
+                                    <div class="component-preview">
+                                        <div class="preview-avatar">
+                                            <span>JD</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="dialog">
+                                    <h3>Dialog</h3>
+                                    <p>Modais para interrupção e foco</p>
+                                    <div class="component-preview">
+                                        <div class="preview-dialog">
+                                            <div class="preview-dialog__content">Modal</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="menu">
+                                    <h3>Menu</h3>
+                                    <p>Listas de ações e navegação</p>
+                                    <div class="component-preview">
+                                        <div class="preview-menu">Menu ▼</div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="tabs">
+                                    <h3>Tabs</h3>
+                                    <p>Navegação entre painéis de conteúdo</p>
+                                    <div class="component-preview">
+                                        <div class="preview-tabs">
+                                            <span class="preview-tabs__active">Tab 1</span>
+                                            <span>Tab 2</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="tags">
+                                    <h3>Tags</h3>
+                                    <p>Rótulos para categorização</p>
+                                    <div class="component-preview">
+                                        <span class="preview-tag">Tag</span>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="tooltip">
+                                    <h3>Tooltip</h3>
+                                    <p>Informações contextuais ao hover</p>
+                                    <div class="component-preview">
+                                        <div class="preview-tooltip">?</div>
                                     </div>
                                     <button class="btn btn--primary btn--sm">Explorar →</button>
                                 </div>
@@ -353,6 +432,272 @@
                                 </div>
                             </div>
                             <pre id="chip-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Playground -->
+            <div class="tab-content" data-content="accordion">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="accordion-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="accordion-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="accordion-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="accordion-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="accordion-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="accordion-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="accordion-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avatar Playground -->
+            <div class="tab-content" data-content="avatar">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="avatar-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="avatar-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="avatar-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="avatar-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="avatar-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="avatar-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="avatar-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dialog Playground -->
+            <div class="tab-content" data-content="dialog">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="dialog-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="dialog-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="dialog-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="dialog-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="dialog-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="dialog-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="dialog-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Playground -->
+            <div class="tab-content" data-content="menu">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="menu-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="menu-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="menu-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="menu-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="menu-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="menu-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="menu-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Playground -->
+            <div class="tab-content" data-content="tabs">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="tabs-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="tabs-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="tabs-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="tabs-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="tabs-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="tabs-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="tabs-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags Playground -->
+            <div class="tab-content" data-content="tags">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="tags-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="tags-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="tags-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="tags-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="tags-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="tags-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="tags-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tooltip Playground -->
+            <div class="tab-content" data-content="tooltip">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="tooltip-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="tooltip-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="tooltip-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="tooltip-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="tooltip-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="tooltip-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="tooltip-code" class="code-display"></pre>
                         </div>
                     </div>
                 </div>
