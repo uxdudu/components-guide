@@ -35,6 +35,11 @@ const componentConfigs = {
         label: "Has Leading Icon",
         default: false,
       },
+      hasTrailingIcon: {
+        type: "boolean",
+        label: "Has Trailing Icon",
+        default: false,
+      },
       isFullWidth: {
         type: "boolean",
         label: "Is Full Width",
@@ -46,12 +51,15 @@ const componentConfigs = {
       "Prefira isDisabled a disabled",
       "Use hasLeadingIcon para ícones",
       "isFullWidth para layout responsivo",
+      "hasTrailingIcon para ações secundárias",
+      "isLoading para feedback de estado",
     ],
     badPractices: [
       'Não use color="blue" ou variant="blue"',
       "Evite disabled={true} - prefira isDisabled",
       "Não misture semântica com estética",
       "Evite nomes genéricos como type ou style",
+      "Não use loading={true} - prefira isLoading",
     ],
     render: (props) => {
       const classes = [
@@ -66,10 +74,14 @@ const componentConfigs = {
         .filter(Boolean)
         .join(" ")
 
-      const icon = props.hasLeadingIcon ? "🔥 " : ""
-      const text = props.isLoading ? "Carregando..." : `${icon}Button`
+      const leadingIcon = props.hasLeadingIcon ? '<span class="btn__icon btn__icon--leading">🔥</span>' : ""
+      const trailingIcon = props.hasTrailingIcon ? '<span class="btn__icon btn__icon--trailing">→</span>' : ""
+      const spinner = props.isLoading ? '<span class="btn__spinner"></span>' : ""
+      const text = props.isLoading ? "Carregando..." : "Button"
 
-      return `<button class="${classes}" ${props.isDisabled ? "disabled" : ""}>${text}</button>`
+      return `<button class="${classes}" ${props.isDisabled ? "disabled" : ""}>
+        ${spinner}${leadingIcon}${text}${trailingIcon}
+      </button>`
     },
   },
 
@@ -113,18 +125,31 @@ const componentConfigs = {
         label: "Has Suffix Icon",
         default: false,
       },
+      hasLabel: {
+        type: "boolean",
+        label: "Has Label",
+        default: true,
+      },
+      hasHelperText: {
+        type: "boolean",
+        label: "Has Helper Text",
+        default: false,
+      },
     },
     goodPractices: [
       "Use state para feedback semântico",
       "isRequired é mais claro que required",
       "hasPrefixIcon descreve o comportamento",
       "Separe estado de aparência visual",
+      "hasLabel para acessibilidade",
+      "hasHelperText para orientação",
     ],
     badPractices: [
       'Não use color="red" para erro',
       'Evite error={true} - prefira state="error"',
       "Não misture validação com estilo",
       "Evite props como hasError, hasSuccess",
+      "Não use placeholder como label",
     ],
     render: (props) => {
       const classes = [
@@ -136,12 +161,38 @@ const componentConfigs = {
       ]
         .filter(Boolean)
         .join(" ")
+      const getStateIcon = () => {
+        switch (props.state) {
+          case "success": return "✓"
+          case "error": return "✗"
+          case "warning": return "⚠"
+          default: return ""
+        }
+      }
 
-      const prefix = props.hasPrefixIcon ? "🔍 " : ""
-      const suffix = props.hasSuffixIcon ? " ✓" : ""
-      const placeholder = `${prefix}Digite algo...${suffix}`
+      const getHelperText = () => {
+        switch (props.state) {
+          case "success": return "Looks good!"
+          case "error": return "This field is required"
+          case "warning": return "Please check this field"
+          default: return "Enter your information"
+        }
+      }
 
-      return `<input class="${classes}" placeholder="${placeholder}" ${props.isDisabled ? "disabled" : ""} ${props.isRequired ? "required" : ""} />`
+      const prefixIcon = props.hasPrefixIcon ? '<span class="input-field__icon input-field__icon--prefix">🔍</span>' : ""
+      const suffixIcon = props.hasSuffixIcon ? `<span class="input-field__icon input-field__icon--suffix">${getStateIcon() || "✓"}</span>` : ""
+      const label = props.hasLabel ? `<label class="input-field__label">Label ${props.isRequired ? '<span class="input-field__required">*</span>' : ''}</label>` : ""
+      const helperText = props.hasHelperText ? `<div class="input-field__helper input-field__helper--${props.state}">${getHelperText()}</div>` : ""
+
+      return `<div class="input-wrapper">
+        ${label}
+        <div class="${classes}">
+          ${prefixIcon}
+          <input class="input-field__input" placeholder="Digite algo..." ${props.isDisabled ? "disabled" : ""} ${props.isRequired ? "required" : ""} />
+          ${suffixIcon}
+        </div>
+        ${helperText}
+      </div>`
     },
   },
 
@@ -287,11 +338,12 @@ const componentConfigs = {
         .join(" ")
 
       const label = props.hasLabel ? `<span class="toggle__label">${props.isOn ? "Ligado" : "Desligado"}</span>` : ""
+      const indicator = props.isOn ? '<span class="toggle__indicator">✓</span>' : ""
 
       return `
                 <div class="${classes}">
                     <div class="toggle__track">
-                        <div class="toggle__thumb"></div>
+                        <div class="toggle__thumb">${indicator}</div>
                     </div>
                     ${label}
                 </div>
@@ -327,39 +379,57 @@ const componentConfigs = {
         label: "Has Actions",
         default: false,
       },
+      hasImage: {
+        type: "boolean",
+        label: "Has Image",
+        default: false,
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["default", "feature", "product"],
+        default: "default",
+      },
     },
     goodPractices: [
       "elevation comunica hierarquia visual",
       "isInteractive indica comportamento",
       "hasHeader/hasActions descrevem slots",
       "Semântica clara para diferentes contextos",
+      "variant define o propósito do card",
+      "hasImage para cards com mídia",
     ],
     badPractices: [
       'Não use shadow="large" ou border="true"',
       "Evite clickable={true}",
       "Não misture estilo com comportamento",
       "Evite props genéricos como type",
+      "Não use imageUrl - prefira hasImage",
     ],
     render: (props) => {
       const classes = [
         "card",
         `card--${props.elevation}`,
+        `card--${props.variant}`,
         props.isInteractive ? "card--interactive" : "",
         props.isOutlined ? "card--outlined" : "",
+        props.hasImage ? "card--has-image" : "",
       ]
         .filter(Boolean)
         .join(" ")
 
-      const header = props.hasHeader ? '<div class="card__header"><h3>Card Title</h3></div>' : ""
+      const image = props.hasImage ? '<div class="card__image"><div class="card__image-placeholder">📷</div></div>' : ""
+      const header = props.hasHeader ? '<div class="card__header"><h3 class="card__title">Card Title</h3><p class="card__subtitle">Subtitle text</p></div>' : ""
       const actions = props.hasActions
-        ? '<div class="card__actions"><button class="btn btn--sm btn--primary">Action</button></div>'
+        ? '<div class="card__actions"><button class="btn btn--sm btn--ghost">Cancel</button><button class="btn btn--sm btn--primary">Confirm</button></div>'
         : ""
 
       return `
                 <div class="${classes}">
+                    ${image}
                     ${header}
                     <div class="card__content">
-                        <p>Card content goes here. This is a sample card component.</p>
+                        <p class="card__description">Card content goes here. This is a sample card component with more detailed information.</p>
                     </div>
                     ${actions}
                 </div>
@@ -387,6 +457,12 @@ const componentConfigs = {
         options: ["none", "gray", "blue", "green"],
         default: "none",
       },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["sm", "md", "lg"],
+        default: "md",
+      },
       isSelected: {
         type: "boolean",
         label: "Is Selected",
@@ -402,18 +478,26 @@ const componentConfigs = {
         label: "Is Disabled",
         default: false,
       },
+      hasIcon: {
+        type: "boolean",
+        label: "Has Icon",
+        default: false,
+      },
     },
     goodPractices: [
       "role define o comportamento do chip",
       "Separe comportamento de aparência",
       "isSelected para estado de seleção",
       "color apenas quando não há semântica",
+      "hasIcon para chips com ícones",
+      "size para hierarquia visual",
     ],
     badPractices: [
       'Não use type="filter-blue"',
       'Evite variant="selected-green"',
       "Não misture role com cor",
       "Evite props como active, checked",
+      "Não use iconName - prefira hasIcon",
     ],
     render: (props) => {
       const actualColor = props.color !== "none" ? props.color : "blue"
@@ -422,16 +506,30 @@ const componentConfigs = {
         `chip--${props.role}`,
         `chip--${props.appearance}`,
         `chip--${actualColor}`,
+        `chip--${props.size}`,
         props.isSelected ? "chip--selected" : "",
         props.isDisabled ? "chip--disabled" : "",
+        props.hasIcon ? "chip--has-icon" : "",
       ]
         .filter(Boolean)
         .join(" ")
 
-      const dismiss = props.isDismissible ? " ×" : ""
-      const text = `${props.role}${dismiss}`
+      const getIcon = () => {
+        if (!props.hasIcon) return ""
+        switch (props.role) {
+          case "filter": return "🔍"
+          case "selection": return "✓"
+          case "token": return "🏷"
+          case "status": return "●"
+          default: return "★"
+        }
+      }
 
-      return `<span class="${classes}">${text}</span>`
+      const icon = props.hasIcon ? `<span class="chip__icon">${getIcon()}</span>` : ""
+      const dismiss = props.isDismissible ? '<span class="chip__dismiss">×</span>' : ""
+      const text = props.role.charAt(0).toUpperCase() + props.role.slice(1)
+
+      return `<span class="${classes}">${icon}${text}${dismiss}</span>`
     },
   },
 }
