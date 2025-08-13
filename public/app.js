@@ -532,6 +532,670 @@ const componentConfigs = {
       return `<span class="${classes}">${icon}${text}${dismiss}</span>`
     },
   },
+
+  accordion: {
+    props: {
+      isExpanded: {
+        type: "boolean",
+        label: "Is Expanded",
+        default: true,
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["default", "bordered", "filled"],
+        default: "default",
+      },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["sm", "md", "lg"],
+        default: "md",
+      },
+      hasIcon: {
+        type: "boolean",
+        label: "Has Icon",
+        default: true,
+      },
+      isDisabled: {
+        type: "boolean",
+        label: "Is Disabled",
+        default: false,
+      },
+      allowMultiple: {
+        type: "boolean",
+        label: "Allow Multiple",
+        default: false,
+      },
+      hasAnimation: {
+        type: "boolean",
+        label: "Has Animation",
+        default: true,
+      },
+    },
+    goodPractices: [
+      "isExpanded é mais claro que open ou active",
+      "variant define o estilo visual",
+      "hasIcon descreve a presença do indicador",
+      "allowMultiple para comportamento de grupo",
+      "hasAnimation para controle de transições",
+      "size para hierarquia visual",
+    ],
+    badPractices: [
+      'Não use open={true} ou active={true}',
+      'Evite expanded="true" como string',
+      "Não misture estado com aparência",
+      "Evite props como collapsible, foldable",
+      "Não use iconPosition - prefira hasIcon",
+    ],
+    render: (props) => {
+      const classes = [
+        "accordion",
+        `accordion--${props.variant}`,
+        `accordion--${props.size}`,
+        props.isExpanded ? "accordion--expanded" : "accordion--collapsed",
+        props.isDisabled ? "accordion--disabled" : "",
+        props.hasAnimation ? "accordion--animated" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const icon = props.hasIcon ? 
+        `<span class="accordion__icon ${props.isExpanded ? 'accordion__icon--expanded' : ''}">${props.isExpanded ? '▼' : '▶'}</span>` : ""
+      
+      const content = props.isExpanded ? `
+        <div class="accordion__content">
+          <div class="accordion__body">
+            <p>Este é o conteúdo do accordion. Aqui você pode colocar qualquer tipo de informação, desde texto simples até componentes complexos.</p>
+            <div class="accordion__actions">
+              <button class="btn btn--sm btn--ghost">Cancelar</button>
+              <button class="btn btn--sm btn--primary">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      ` : ""
+
+      return `
+        <div class="${classes}">
+          <div class="accordion__header">
+            ${icon}
+            <span class="accordion__title">Seção do Accordion</span>
+            <span class="accordion__subtitle">Clique para ${props.isExpanded ? 'recolher' : 'expandir'}</span>
+          </div>
+          ${content}
+        </div>
+      `
+    },
+  },
+
+  avatar: {
+    props: {
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["xs", "sm", "md", "lg", "xl", "2xl"],
+        default: "md",
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["circular", "rounded", "square"],
+        default: "circular",
+      },
+      hasImage: {
+        type: "boolean",
+        label: "Has Image",
+        default: false,
+      },
+      hasStatus: {
+        type: "boolean",
+        label: "Has Status",
+        default: false,
+      },
+      statusType: {
+        type: "select",
+        label: "Status Type",
+        options: ["online", "offline", "away", "busy"],
+        default: "online",
+      },
+      hasBorder: {
+        type: "boolean",
+        label: "Has Border",
+        default: false,
+      },
+      isClickable: {
+        type: "boolean",
+        label: "Is Clickable",
+        default: false,
+      },
+    },
+    goodPractices: [
+      "size para diferentes contextos de uso",
+      "hasImage vs src para controle semântico",
+      "hasStatus descreve funcionalidade",
+      "statusType para diferentes estados",
+      "isClickable indica interatividade",
+      "variant define forma geométrica",
+    ],
+    badPractices: [
+      'Não use src="" para controlar imagem',
+      'Evite online={true} - prefira statusType',
+      "Não misture tamanho com forma",
+      "Evite props como clickable, bordered",
+      "Não use color para status",
+    ],
+    render: (props) => {
+      const classes = [
+        "avatar",
+        `avatar--${props.size}`,
+        `avatar--${props.variant}`,
+        props.hasBorder ? "avatar--bordered" : "",
+        props.isClickable ? "avatar--clickable" : "",
+        props.hasImage ? "avatar--has-image" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const statusClasses = [
+        "avatar__status",
+        `avatar__status--${props.statusType}`,
+      ].join(" ")
+
+      const content = props.hasImage ? 
+        '<div class="avatar__image">👤</div>' : 
+        '<span class="avatar__initials">JD</span>'
+
+      const status = props.hasStatus ? 
+        `<div class="${statusClasses}"></div>` : ""
+
+      return `
+        <div class="${classes}">
+          ${content}
+          ${status}
+        </div>
+      `
+    },
+  },
+
+  dialog: {
+    props: {
+      isOpen: {
+        type: "boolean",
+        label: "Is Open",
+        default: true,
+      },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["xs", "sm", "md", "lg", "xl", "full"],
+        default: "md",
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["default", "alert", "confirmation"],
+        default: "default",
+      },
+      hasOverlay: {
+        type: "boolean",
+        label: "Has Overlay",
+        default: true,
+      },
+      isDismissible: {
+        type: "boolean",
+        label: "Is Dismissible",
+        default: true,
+      },
+      hasHeader: {
+        type: "boolean",
+        label: "Has Header",
+        default: true,
+      },
+      hasFooter: {
+        type: "boolean",
+        label: "Has Footer",
+        default: true,
+      },
+    },
+    goodPractices: [
+      "isOpen para controle de visibilidade",
+      "isDismissible indica se pode fechar",
+      "hasOverlay descreve backdrop",
+      "variant define propósito semântico",
+      "size para diferentes contextos",
+      "hasHeader/hasFooter para slots",
+    ],
+    badPractices: [
+      'Não use visible={true} ou show={true}',
+      'Evite closable - prefira isDismissible',
+      "Não misture tamanho com tipo",
+      "Evite props como modal, popup",
+      "Não use backdrop - prefira hasOverlay",
+    ],
+    render: (props) => {
+      if (!props.isOpen) return '<div class="dialog-placeholder">Dialog está fechado</div>'
+
+      const classes = [
+        "dialog",
+        `dialog--${props.size}`,
+        `dialog--${props.variant}`,
+        props.isDismissible ? "dialog--dismissible" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const overlay = props.hasOverlay ? '<div class="dialog__overlay"></div>' : ""
+      
+      const header = props.hasHeader ? `
+        <div class="dialog__header">
+          <h3 class="dialog__title">Título do Dialog</h3>
+          ${props.isDismissible ? '<button class="dialog__close">×</button>' : ''}
+        </div>
+      ` : ""
+
+      const footer = props.hasFooter ? `
+        <div class="dialog__footer">
+          <button class="btn btn--sm btn--ghost">Cancelar</button>
+          <button class="btn btn--sm btn--primary">Confirmar</button>
+        </div>
+      ` : ""
+
+      return `
+        <div class="dialog-container">
+          ${overlay}
+          <div class="${classes}">
+            ${header}
+            <div class="dialog__content">
+              <p>Este é o conteúdo do dialog. Aqui você pode colocar formulários, informações ou qualquer outro conteúdo relevante.</p>
+            </div>
+            ${footer}
+          </div>
+        </div>
+      `
+    },
+  },
+
+  menu: {
+    props: {
+      isOpen: {
+        type: "boolean",
+        label: "Is Open",
+        default: true,
+      },
+      placement: {
+        type: "select",
+        label: "Placement",
+        options: ["bottom-start", "bottom-end", "top-start", "top-end", "right", "left"],
+        default: "bottom-start",
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["default", "context", "navigation"],
+        default: "default",
+      },
+      hasIcons: {
+        type: "boolean",
+        label: "Has Icons",
+        default: true,
+      },
+      hasDividers: {
+        type: "boolean",
+        label: "Has Dividers",
+        default: true,
+      },
+      hasSearch: {
+        type: "boolean",
+        label: "Has Search",
+        default: false,
+      },
+      isMultiLevel: {
+        type: "boolean",
+        label: "Is Multi Level",
+        default: false,
+      },
+    },
+    goodPractices: [
+      "isOpen para controle de visibilidade",
+      "placement para posicionamento semântico",
+      "hasIcons descreve presença de ícones",
+      "hasDividers para separadores visuais",
+      "variant define contexto de uso",
+      "isMultiLevel para menus aninhados",
+    ],
+    badPractices: [
+      'Não use visible ou show para estado',
+      'Evite position - prefira placement',
+      "Não misture estilo com comportamento",
+      "Evite props como dropdown, popup",
+      "Não use iconPosition - prefira hasIcons",
+    ],
+    render: (props) => {
+      if (!props.isOpen) return '<div class="menu-trigger">Menu ▼</div>'
+
+      const classes = [
+        "menu",
+        `menu--${props.variant}`,
+        `menu--${props.placement}`,
+        props.hasIcons ? "menu--has-icons" : "",
+        props.isMultiLevel ? "menu--multi-level" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const search = props.hasSearch ? `
+        <div class="menu__search">
+          <input class="menu__search-input" placeholder="Buscar..." />
+        </div>
+      ` : ""
+
+      const divider = props.hasDividers ? '<div class="menu__divider"></div>' : ""
+
+      const icon = (name) => props.hasIcons ? `<span class="menu__icon">${name}</span>` : ""
+
+      return `
+        <div class="${classes}">
+          ${search}
+          <div class="menu__item">
+            ${icon('📝')}
+            <span>Editar</span>
+            <span class="menu__shortcut">⌘E</span>
+          </div>
+          <div class="menu__item">
+            ${icon('📋')}
+            <span>Copiar</span>
+            <span class="menu__shortcut">⌘C</span>
+          </div>
+          ${divider}
+          <div class="menu__item menu__item--danger">
+            ${icon('🗑')}
+            <span>Excluir</span>
+            <span class="menu__shortcut">⌘⌫</span>
+          </div>
+        </div>
+      `
+    },
+  },
+
+  tabs: {
+    props: {
+      activeTab: {
+        type: "select",
+        label: "Active Tab",
+        options: ["tab1", "tab2", "tab3"],
+        default: "tab1",
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["line", "enclosed", "soft-rounded", "solid-rounded"],
+        default: "line",
+      },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["sm", "md", "lg"],
+        default: "md",
+      },
+      isVertical: {
+        type: "boolean",
+        label: "Is Vertical",
+        default: false,
+      },
+      hasIcons: {
+        type: "boolean",
+        label: "Has Icons",
+        default: false,
+      },
+      isFitted: {
+        type: "boolean",
+        label: "Is Fitted",
+        default: false,
+      },
+      isDisabled: {
+        type: "boolean",
+        label: "Is Disabled",
+        default: false,
+      },
+    },
+    goodPractices: [
+      "activeTab para controle de estado",
+      "variant define estilo visual",
+      "isVertical para orientação",
+      "hasIcons descreve presença de ícones",
+      "isFitted para largura total",
+      "size para hierarquia visual",
+    ],
+    badPractices: [
+      'Não use selected ou current para aba ativa',
+      'Evite orientation - prefira isVertical',
+      "Não misture estilo com estado",
+      "Evite props como fullWidth - use isFitted",
+      "Não use iconPosition - prefira hasIcons",
+    ],
+    render: (props) => {
+      const classes = [
+        "tabs",
+        `tabs--${props.variant}`,
+        `tabs--${props.size}`,
+        props.isVertical ? "tabs--vertical" : "tabs--horizontal",
+        props.isFitted ? "tabs--fitted" : "",
+        props.isDisabled ? "tabs--disabled" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const getIcon = (tab) => {
+        if (!props.hasIcons) return ""
+        const icons = { tab1: "🏠", tab2: "👤", tab3: "⚙️" }
+        return `<span class="tabs__icon">${icons[tab]}</span>`
+      }
+
+      const tabs = ["tab1", "tab2", "tab3"].map(tab => {
+        const isActive = tab === props.activeTab
+        const tabClasses = [
+          "tabs__tab",
+          isActive ? "tabs__tab--active" : "",
+        ].filter(Boolean).join(" ")
+
+        const labels = { tab1: "Home", tab2: "Profile", tab3: "Settings" }
+        
+        return `
+          <button class="${tabClasses}">
+            ${getIcon(tab)}
+            <span>${labels[tab]}</span>
+          </button>
+        `
+      }).join("")
+
+      const content = `
+        <div class="tabs__content">
+          <div class="tabs__panel">
+            Conteúdo da aba ${props.activeTab === "tab1" ? "Home" : props.activeTab === "tab2" ? "Profile" : "Settings"}
+          </div>
+        </div>
+      `
+
+      return `
+        <div class="${classes}">
+          <div class="tabs__list">
+            ${tabs}
+          </div>
+          ${content}
+        </div>
+      `
+    },
+  },
+
+  tags: {
+    props: {
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["solid", "subtle", "outline"],
+        default: "subtle",
+      },
+      color: {
+        type: "select",
+        label: "Color",
+        options: ["gray", "blue", "green", "yellow", "red", "purple"],
+        default: "blue",
+      },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["sm", "md", "lg"],
+        default: "md",
+      },
+      isDismissible: {
+        type: "boolean",
+        label: "Is Dismissible",
+        default: false,
+      },
+      isInteractive: {
+        type: "boolean",
+        label: "Is Interactive",
+        default: false,
+      },
+      hasIcon: {
+        type: "boolean",
+        label: "Has Icon",
+        default: false,
+      },
+      isDisabled: {
+        type: "boolean",
+        label: "Is Disabled",
+        default: false,
+      },
+    },
+    goodPractices: [
+      "variant define aparência visual",
+      "color para categorização",
+      "isDismissible indica remoção",
+      "isInteractive para cliques",
+      "hasIcon descreve presença de ícone",
+      "size para hierarquia visual",
+    ],
+    badPractices: [
+      'Não use closable - prefira isDismissible',
+      'Evite clickable - prefira isInteractive',
+      "Não misture cor com comportamento",
+      "Evite props como removable, selectable",
+      "Não use iconName - prefira hasIcon",
+    ],
+    render: (props) => {
+      const classes = [
+        "tag",
+        `tag--${props.variant}`,
+        `tag--${props.color}`,
+        `tag--${props.size}`,
+        props.isInteractive ? "tag--interactive" : "",
+        props.isDisabled ? "tag--disabled" : "",
+        props.hasIcon ? "tag--has-icon" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const icon = props.hasIcon ? '<span class="tag__icon">🏷</span>' : ""
+      const dismiss = props.isDismissible ? '<button class="tag__dismiss">×</button>' : ""
+
+      return `
+        <span class="${classes}">
+          ${icon}
+          <span class="tag__label">Tag Label</span>
+          ${dismiss}
+        </span>
+      `
+    },
+  },
+
+  tooltip: {
+    props: {
+      isVisible: {
+        type: "boolean",
+        label: "Is Visible",
+        default: true,
+      },
+      placement: {
+        type: "select",
+        label: "Placement",
+        options: ["top", "bottom", "left", "right", "top-start", "top-end", "bottom-start", "bottom-end"],
+        default: "top",
+      },
+      variant: {
+        type: "select",
+        label: "Variant",
+        options: ["default", "light", "success", "warning", "error"],
+        default: "default",
+      },
+      hasArrow: {
+        type: "boolean",
+        label: "Has Arrow",
+        default: true,
+      },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["sm", "md", "lg"],
+        default: "md",
+      },
+      isInteractive: {
+        type: "boolean",
+        label: "Is Interactive",
+        default: false,
+      },
+      hasCloseButton: {
+        type: "boolean",
+        label: "Has Close Button",
+        default: false,
+      },
+    },
+    goodPractices: [
+      "isVisible para controle de estado",
+      "placement para posicionamento",
+      "hasArrow descreve indicador visual",
+      "variant para contexto semântico",
+      "isInteractive para tooltips clicáveis",
+      "size para diferentes contextos",
+    ],
+    badPractices: [
+      'Não use show ou visible como string',
+      'Evite position - prefira placement',
+      "Não misture estilo com comportamento",
+      "Evite props como arrow, closable",
+      "Não use color para variantes semânticas",
+    ],
+    render: (props) => {
+      if (!props.isVisible) return '<div class="tooltip-trigger">Hover me</div>'
+
+      const classes = [
+        "tooltip",
+        `tooltip--${props.variant}`,
+        `tooltip--${props.placement}`,
+        `tooltip--${props.size}`,
+        props.hasArrow ? "tooltip--has-arrow" : "",
+        props.isInteractive ? "tooltip--interactive" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")
+
+      const arrow = props.hasArrow ? '<div class="tooltip__arrow"></div>' : ""
+      const closeButton = props.hasCloseButton ? '<button class="tooltip__close">×</button>' : ""
+
+      return `
+        <div class="tooltip-container">
+          <div class="tooltip-trigger">Hover target</div>
+          <div class="${classes}">
+            ${arrow}
+            <div class="tooltip__content">
+              Esta é uma tooltip informativa
+              ${closeButton}
+            </div>
+          </div>
+        </div>
+      `
+    },
+  },
 }
 
 // Estado da aplicação
