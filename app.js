@@ -906,6 +906,9 @@ function updateComponentPreview(componentName) {
   }
   
   previewContainer.innerHTML = previewHTML;
+  
+  // Add interactive behaviors after rendering
+  addInteractiveBehaviors(componentName, previewContainer);
 }
 
 function createButtonPreview(state) {
@@ -983,7 +986,7 @@ function createTogglePreview(state) {
   
   return `
     <div class="${classes}">
-      <div class="${trackClasses}" ${state.isDisabled ? 'disabled' : ''}>
+      <div class="${trackClasses}" ${state.isDisabled ? 'disabled' : ''} data-action="toggle-switch">
         <div class="dynamic-toggle__thumb"></div>
       </div>
       ${label}
@@ -1024,7 +1027,7 @@ function createChipPreview(state) {
   const text = `${state.role.charAt(0).toUpperCase() + state.role.slice(1)} Chip`;
   const dismissButton = state.isDismissible ? ' <button style="background: none; border: none; margin-left: 4px; color: inherit;">×</button>' : '';
   
-  return `<span class="${classes}" ${state.isDisabled ? 'disabled' : ''}>${text}${dismissButton}</span>`;
+  return `<span class="${classes}" ${state.isDisabled ? 'disabled' : ''} ${state.role === 'selection' || state.role === 'filter' ? 'data-action="toggle-chip"' : ''}>${text}${dismissButton}</span>`;
 }
 
 function createAccordionPreview(state) {
@@ -1045,7 +1048,7 @@ function createAccordionPreview(state) {
   
   return `
     <div class="${classes}">
-      <div class="${headerClasses}">
+      <div class="${headerClasses}" data-action="toggle-accordion">
         ${icon}
         <span>Item do Accordion</span>
       </div>
@@ -1079,7 +1082,7 @@ function createAvatarPreview(state) {
 
 function createDialogPreview(state) {
   if (!state.isOpen) {
-    return '<button class="btn btn--primary btn--sm">Abrir Dialog</button>';
+    return '<button class="btn btn--primary btn--sm" data-action="open-dialog">Abrir Dialog</button>';
   }
   
   const classes = [
@@ -1089,7 +1092,7 @@ function createDialogPreview(state) {
   ].join(' ');
   
   const overlay = state.hasOverlay ? '<div class="dynamic-dialog__overlay"></div>' : '';
-  const closeButton = state.hasCloseButton ? '<button class="dynamic-dialog__close">×</button>' : '';
+  const closeButton = state.hasCloseButton ? '<button class="dynamic-dialog__close" data-action="close-dialog">×</button>' : '';
   
   return `
     ${overlay}
@@ -1102,7 +1105,7 @@ function createDialogPreview(state) {
         Este é o conteúdo do dialog. Demonstra como as propriedades afetam a aparência.
       </div>
       <div class="dynamic-dialog__actions">
-        <button class="btn btn--outline btn--sm">Cancelar</button>
+        <button class="btn btn--outline btn--sm" data-action="close-dialog">Cancelar</button>
         <button class="btn btn--primary btn--sm">Confirmar</button>
       </div>
     </div>
@@ -1111,7 +1114,7 @@ function createDialogPreview(state) {
 
 function createMenuPreview(state) {
   if (!state.isOpen) {
-    return '<button class="btn btn--outline btn--sm">Menu ▼</button>';
+    return '<button class="btn btn--outline btn--sm" data-action="toggle-menu">Menu ▼</button>';
   }
   
   const classes = [
@@ -1124,7 +1127,7 @@ function createMenuPreview(state) {
   
   return `
     <div style="position: relative; display: inline-block;">
-      <button class="btn btn--outline btn--sm">Menu ▼</button>
+      <button class="btn btn--outline btn--sm" data-action="toggle-menu">Menu ▲</button>
       <div class="${classes}">
         <div class="dynamic-menu__item">${iconPrefix}Item 1</div>
         <div class="dynamic-menu__item">${iconPrefix}Item 2</div>
@@ -1148,12 +1151,18 @@ function createTabsPreview(state) {
   return `
     <div class="${classes}">
       <div class="dynamic-tabs__list">
-        <button class="dynamic-tabs__tab dynamic-tabs__tab--active">${iconPrefix}Tab 1</button>
-        <button class="dynamic-tabs__tab">${iconPrefix}Tab 2</button>
-        <button class="dynamic-tabs__tab">${iconPrefix}Tab 3</button>
+        <button class="dynamic-tabs__tab dynamic-tabs__tab--active" data-action="switch-tab" data-tab="1">${iconPrefix}Tab 1</button>
+        <button class="dynamic-tabs__tab" data-action="switch-tab" data-tab="2">${iconPrefix}Tab 2</button>
+        <button class="dynamic-tabs__tab" data-action="switch-tab" data-tab="3">${iconPrefix}Tab 3</button>
       </div>
-      <div class="dynamic-tabs__panel">
-        Conteúdo da aba ativa
+      <div class="dynamic-tabs__panel" data-panel="1">
+        Conteúdo da Tab 1
+      </div>
+      <div class="dynamic-tabs__panel" data-panel="2" style="display: none;">
+        Conteúdo da Tab 2
+      </div>
+      <div class="dynamic-tabs__panel" data-panel="3" style="display: none;">
+        Conteúdo da Tab 3
       </div>
     </div>
   `;
@@ -1170,7 +1179,7 @@ function createTagsPreview(state) {
   
   const removeButton = state.isRemovable ? ' <button style="background: none; border: none; margin-left: 4px; color: inherit;">×</button>' : '';
   
-  return `<span class="${classes}" ${state.isDisabled ? 'disabled' : ''}>${state.scheme.charAt(0).toUpperCase() + state.scheme.slice(1)} Tag${removeButton}</span>`;
+  return `<span class="${classes}" ${state.isDisabled ? 'disabled' : ''} ${state.isClickable ? 'data-action="click-tag"' : ''}>${state.scheme.charAt(0).toUpperCase() + state.scheme.slice(1)} Tag${removeButton}</span>`;
 }
 
 function createTooltipPreview(state) {
@@ -1186,7 +1195,7 @@ function createTooltipPreview(state) {
   
   return `
     <div style="position: relative; display: inline-block;">
-      <button class="btn btn--outline btn--sm">Hover para tooltip</button>
+      <button class="btn btn--outline btn--sm" data-action="toggle-tooltip">Hover para tooltip</button>
       ${tooltip}
     </div>
   `;
@@ -1300,6 +1309,147 @@ function updateComponentInfoSections(componentName) {
   
   // Append to code section
   codeSection.appendChild(infoSection);
+}
+
+// Add interactive behaviors to previews
+function addInteractiveBehaviors(componentName, container) {
+  const actionElements = container.querySelectorAll('[data-action]');
+  
+  actionElements.forEach(element => {
+    const action = element.getAttribute('data-action');
+    
+    switch (action) {
+      case 'open-dialog':
+        element.addEventListener('click', () => {
+          componentStates[componentName].isOpen = true;
+          updateComponentPreview(componentName);
+          updateGeneratedCode(componentName);
+        });
+        break;
+        
+      case 'close-dialog':
+      case 'close-dialog-overlay':
+        element.addEventListener('click', () => {
+          if (action === 'close-dialog-overlay' && !componentStates[componentName].isClosableOnOverlay) {
+            return;
+          }
+          componentStates[componentName].isOpen = false;
+          updateComponentPreview(componentName);
+          updateGeneratedCode(componentName);
+        });
+        break;
+        
+      case 'toggle-menu':
+        element.addEventListener('click', () => {
+          componentStates[componentName].isOpen = !componentStates[componentName].isOpen;
+          updateComponentPreview(componentName);
+          updateGeneratedCode(componentName);
+        });
+        break;
+        
+      case 'toggle-switch':
+        if (!componentStates[componentName].isDisabled) {
+          element.addEventListener('click', () => {
+            componentStates[componentName].isOn = !componentStates[componentName].isOn;
+            updateComponentPreview(componentName);
+            updateGeneratedCode(componentName);
+          });
+        }
+        break;
+        
+      case 'toggle-accordion':
+        if (!componentStates[componentName].isDisabled) {
+          element.addEventListener('click', () => {
+            componentStates[componentName].isExpanded = !componentStates[componentName].isExpanded;
+            updateComponentPreview(componentName);
+            updateGeneratedCode(componentName);
+          });
+        }
+        break;
+        
+      case 'switch-tab':
+        element.addEventListener('click', () => {
+          const tabNumber = element.getAttribute('data-tab');
+          
+          // Update active tab
+          const tabList = container.querySelector('.dynamic-tabs__list');
+          tabList.querySelectorAll('.dynamic-tabs__tab').forEach(tab => {
+            tab.classList.remove('dynamic-tabs__tab--active');
+          });
+          element.classList.add('dynamic-tabs__tab--active');
+          
+          // Show corresponding panel
+          const panels = container.querySelectorAll('.dynamic-tabs__panel');
+          panels.forEach(panel => {
+            panel.style.display = panel.getAttribute('data-panel') === tabNumber ? 'block' : 'none';
+          });
+        });
+        break;
+        
+      case 'toggle-tooltip':
+        if (componentStates[componentName].trigger === 'hover') {
+          element.addEventListener('mouseenter', () => {
+            componentStates[componentName].isOpen = true;
+            updateComponentPreview(componentName);
+            updateGeneratedCode(componentName);
+          });
+          element.addEventListener('mouseleave', () => {
+            componentStates[componentName].isOpen = false;
+            updateComponentPreview(componentName);
+            updateGeneratedCode(componentName);
+          });
+        } else if (componentStates[componentName].trigger === 'click') {
+          element.addEventListener('click', () => {
+            componentStates[componentName].isOpen = !componentStates[componentName].isOpen;
+            updateComponentPreview(componentName);
+            updateGeneratedCode(componentName);
+          });
+        }
+        break;
+        
+      case 'toggle-chip':
+        if (!componentStates[componentName].isDisabled) {
+          element.addEventListener('click', () => {
+            componentStates[componentName].isSelected = !componentStates[componentName].isSelected;
+            updateComponentPreview(componentName);
+            updateGeneratedCode(componentName);
+          });
+        }
+        break;
+        
+      case 'click-tag':
+        if (!componentStates[componentName].isDisabled && componentStates[componentName].isClickable) {
+          element.addEventListener('click', () => {
+            // Visual feedback for tag click
+            element.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              element.style.transform = 'scale(1)';
+            }, 150);
+          });
+        }
+        break;
+    }
+  });
+  
+  // Handle dismiss buttons
+  const dismissButtons = container.querySelectorAll('button');
+  dismissButtons.forEach(button => {
+    if (button.textContent === '×') {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Visual feedback for dismiss
+        const parent = button.closest('.dynamic-badge, .dynamic-chip, .dynamic-tags');
+        if (parent) {
+          parent.style.opacity = '0.5';
+          parent.style.transform = 'scale(0.8)';
+          setTimeout(() => {
+            parent.style.opacity = '1';
+            parent.style.transform = 'scale(1)';
+          }, 300);
+        }
+      });
+    }
+  });
 }
 
 // Load practices
