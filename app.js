@@ -309,7 +309,7 @@ const componentsData = {
       "type conflitando com role"
     ]
   }
-  },
+  ,
   "Accordion": {
     "description": "Organiza conteúdo em seções expansíveis e colapsáveis.",
     "figmaTips": [
