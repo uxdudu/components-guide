@@ -5,9 +5,9 @@
   "main": "public/index.html",
   "scripts": {
     "build": "echo 'Static site ready - files already in public directory'",
-    "start": "serve public -p 8000",
+    "start": "npx serve public -p 8000",
     "serve": "npx serve public",
-    "dev": "serve public -p 8000"
+    "dev": "npx serve public -p 8000"
   },
   "keywords": [
     "design-system",
