@@ -21,10 +21,6 @@
   ],
   "author": "Eduardo Amaral",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/uxdudu/components-guide.git"
-  },
   "homepage": "https://components-guide.vercel.app",
   "bugs": {
     "url": "https://github.com/uxdudu/components-guide/issues"
