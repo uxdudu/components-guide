@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted/30;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Code syntax highlighting */
+.code-block {
+  @apply bg-muted/50 border rounded-lg p-4 font-mono text-sm;
+}
+
+.code-inline {
+  @apply bg-muted/50 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+/* Component preview styles */
+.component-preview {
+  @apply border rounded-lg p-6 bg-card;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Sticky navigation */
+.sticky-nav {
+  @apply sticky top-4 h-fit;
+}
+
+/* Coverage checker styles */
+.coverage-item {
+  @apply flex items-center gap-2 p-2 rounded hover:bg-muted/50 transition-colors;
+}
+
+.coverage-item.checked {
+  @apply bg-primary/10 border-primary/20;
+}
+
+/* Keyboard map table */
+.keyboard-map {
+  @apply text-sm;
+}
+
+.keyboard-map kbd {
+  @apply bg-muted px-2 py-1 rounded text-xs font-mono border;
+}
+
+/* Contrast checker */
+.contrast-demo {
+  @apply p-4 rounded-lg border text-center font-medium;
+}
+
+/* Search results */
+.search-result {
+  @apply p-3 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer;
+}
+
+.search-result.highlighted {
+  @apply bg-primary/10 border-primary/20;
+}
+
+/* Component anatomy diagram */
+.anatomy-diagram {
+  @apply relative border rounded-lg p-6 bg-card;
+}
+
+.anatomy-label {
+  @apply absolute bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium;
+  transform: translate(-50%, -100%);
+}
+
+.anatomy-label::after {
+  content: '';
+  @apply absolute top-full left-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-primary;
+  transform: translateX(-50%);
+}
+
+/* Progress indicators */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.35s;
+  transform-origin: 50% 50%;
+}
+
+/* Animation utilities */
+.animate-in {
+  animation: animate-in 0.2s ease-out;
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus styles */
+.focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Component status badges */
+.status-stable {
+  @apply bg-green-100 text-green-800 border-green-200;
+}
+
+.status-draft {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+}
+
+.status-deprecated {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
