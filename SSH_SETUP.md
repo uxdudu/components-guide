@@ -4,9 +4,9 @@
 A chave SSH não está configurada no GitHub, por isso não conseguimos fazer push.
 
 ## 🔑 Sua Chave SSH Pública
-```
+\`\`\`
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8KciQwTx0D4Kex7a+jHONHwo3Ee5QcWbWJuZnBI4IA <comment>
-```
+\`\`\`
 
 ## 📋 Passos para Configurar SSH no GitHub
 
@@ -23,25 +23,25 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8KciQwTx0D4Kex7a+jHONHwo3Ee5QcWbWJuZnBI4IA
 
 ### 3. Verificar Configuração
 Após adicionar, teste no terminal:
-```bash
+\`\`\`bash
 ssh -T git@github.com
-```
+\`\`\`
 
 Você deve ver uma mensagem como:
-```
+\`\`\`
 Hi uxdudu! You've successfully authenticated, but GitHub does not provide shell access.
-```
+\`\`\`
 
 ## 🚀 Após Configurar SSH
 
 ### Fazer Push do Código
-```bash
+\`\`\`bash
 # Verificar se SSH está funcionando
 ssh -T git@github.com
 
 # Fazer push para o GitHub
 git push -u origin main
-```
+\`\`\`
 
 ### Verificar no GitHub
 - Acesse: https://github.com/uxdudu/link-tree-copy
@@ -61,7 +61,7 @@ Se preferir não usar SSH, você pode:
 6. Clique **"Generate token"**
 
 ### 2. Usar Token
-```bash
+\`\`\`bash
 # Voltar para HTTPS
 git remote set-url origin https://github.com/uxdudu/link-tree-copy.git
 
@@ -69,7 +69,7 @@ git remote set-url origin https://github.com/uxdudu/link-tree-copy.git
 git push -u origin main
 # Username: uxdudu
 # Password: [cole o token aqui]
-```
+\`\`\`
 
 ## 🎯 Recomendação
 

@@ -16,19 +16,19 @@ Uma aplicação interativa que ensina como construir componentes de UI seguindo 
 ## 🚀 Como Usar
 
 1. **Clone o repositório:**
-   ```bash
+   \`\`\`bash
    git clone https://github.com/seu-usuario/build-components.git
    cd build-components
-   ```
+   \`\`\`
 
 2. **Abra o projeto:**
    - Abra o arquivo `index.html` em qualquer navegador moderno
    - Ou use um servidor local simples:
-   ```bash
+   \`\`\`bash
    python -m http.server 8000
    # ou
    npx serve .
-   ```
+   \`\`\`
 
 3. **Explore os Componentes:**
    - Navegue pelo dashboard para entender os princípios
@@ -119,13 +119,13 @@ O projeto inclui um sistema de design completo com:
 ## 🔧 Desenvolvimento
 
 ### Estrutura do Projeto
-```
+\`\`\`
 build-components/
 ├── index.html          # Página principal
 ├── app.js             # Lógica da aplicação
 ├── style.css          # Estilos e design system
 └── README.md          # Documentação
-```
+\`\`\`
 
 ### Funcionalidades Principais
 - Sistema de navegação por abas

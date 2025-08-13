@@ -27,7 +27,7 @@
 
 Após criar o repositório no GitHub, execute estes comandos no terminal:
 
-```bash
+\`\`\`bash
 # Adicionar o repositório remoto (substitua SEU_USUARIO pelo seu username do GitHub)
 git remote add origin https://github.com/SEU_USUARIO/build-components.git
 
@@ -37,7 +37,7 @@ git remote -v
 # Fazer push do código para o GitHub
 git branch -M main
 git push -u origin main
-```
+\`\`\`
 
 ### 4. Verificar no GitHub
 
@@ -74,9 +74,9 @@ Adicione tags relevantes ao repositório:
 - `css-variables`
 
 #### Descrição do Repositório
-```
+\`\`\`
 🎨 Guia interativo que ensina como construir componentes de UI seguindo as melhores práticas de design. Foca na diferença entre naming semântico e estético, com playgrounds interativos e geração automática de código TypeScript.
-```
+\`\`\`
 
 ## 🎯 Próximos Passos
 
@@ -89,7 +89,7 @@ Após configurar o repositório:
 
 ## 🔧 Comandos Úteis
 
-```bash
+\`\`\`bash
 # Ver status do repositório
 git status
 
@@ -106,11 +106,11 @@ git push
 
 # Fazer pull de mudanças
 git pull origin main
-```
+\`\`\`
 
 ---
 
 **💡 Dica:** Se preferir usar SSH em vez de HTTPS, use:
-```bash
+\`\`\`bash
 git remote add origin git@github.com:SEU_USUARIO/build-components.git
-```
+\`\`\`

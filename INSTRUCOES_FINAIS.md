@@ -20,7 +20,7 @@
 - **NÃO** marque as opções de README, .gitignore ou LICENSE
 
 ### 2. Conectar Repositório Local ao GitHub
-```bash
+\`\`\`bash
 # Substitua SEU_USUARIO pelo seu username do GitHub
 git remote add origin https://github.com/SEU_USUARIO/build-components.git
 
@@ -29,7 +29,7 @@ git remote -v
 
 # Fazer push para o GitHub
 git push -u origin main
-```
+\`\`\`
 
 ### 3. Configurar GitHub Pages
 1. Vá em **Settings** > **Pages**
@@ -49,7 +49,7 @@ git push -u origin main
 
 ## 📁 Estrutura Final do Projeto:
 
-```
+\`\`\`
 build-components/
 ├── .github/
 │   └── workflows/
@@ -63,7 +63,7 @@ build-components/
 ├── package.json               # Metadados do projeto
 ├── GITHUB_SETUP.md           # Guia de configuração
 └── INSTRUCOES_FINAIS.md      # Este arquivo
-```
+\`\`\`
 
 ## 🌐 URLs Importantes:
 
@@ -82,7 +82,7 @@ Após seguir estes passos, você terá:
 
 ## 🔧 Comandos Úteis para o Futuro:
 
-```bash
+\`\`\`bash
 # Fazer mudanças e enviar para o GitHub
 git add .
 git commit -m "Descrição da mudança"
@@ -93,7 +93,7 @@ git status
 
 # Ver histórico de commits
 git log --oneline
-```
+\`\`\`
 
 ---
 
