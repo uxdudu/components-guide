@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Construir Componentes do Jeito Certo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <h1 class="header__title">Como Construir Componentes do Jeito Certo</h1>
+                <p class="header__subtitle">Aprenda a diferença entre naming semântico e estético</p>
+            </div>
+        </header>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <div class="nav-tabs">
+                    <button class="nav-tab nav-tab--active" data-tab="dashboard">Dashboard</button>
+                    <button class="nav-tab" data-tab="button">Button</button>
+                    <button class="nav-tab" data-tab="input">Input</button>
+                    <button class="nav-tab" data-tab="badge">Badge</button>
+                    <button class="nav-tab" data-tab="toggle">Toggle</button>
+                    <button class="nav-tab" data-tab="card">Card</button>
+                    <button class="nav-tab" data-tab="chip">Chip</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div class="tab-content tab-content--active" data-content="dashboard">
+                <div class="container">
+                    <div class="dashboard">
+                        <!-- Princípios -->
+                        <section class="principles-section">
+                            <h2>Princípios Fundamentais</h2>
+                            <div class="principles-grid">
+                                <div class="principle-card">
+                                    <h3>Uma Preocupação, Um Prop</h3>
+                                    <p>Estado: <code>state</code> OU <code>type</code> (nunca <code>color</code>).</p>
+                                </div>
+                                <div class="principle-card">
+                                    <h3>Boolean vs Enum</h3>
+                                    <p>Boolean para binário (<code>isX</code>, <code>hasY</code>). Enum para múltiplas opções (<code>intent</code>, <code>size</code>).</p>
+                                </div>
+                                <div class="principle-card">
+                                    <h3>Nomes Claros</h3>
+                                    <p><code>isDisabled</code>, <code>hasIcon</code>, <code>isOn</code> - nomes claros e Figma-friendly.</p>
+                                </div>
+                                <div class="principle-card">
+                                    <h3>Semântica Primeiro</h3>
+                                    <p>Prefira semântica quando há significado. Estética só quando necessário.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Cards de Componentes -->
+                        <section class="components-section">
+                            <h2>Componentes Disponíveis</h2>
+                            <div class="components-grid">
+                                <div class="component-card" data-component="button">
+                                    <h3>Button</h3>
+                                    <p>Aprenda sobre intent, size, appearance e estados</p>
+                                    <div class="component-preview">
+                                        <button class="preview-button">Clique Aqui</button>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="input">
+                                    <h3>Input</h3>
+                                    <p>Estados semânticos vs propriedades estéticas</p>
+                                    <div class="component-preview">
+                                        <input class="preview-input" placeholder="Digite algo..." />
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="badge">
+                                    <h3>Badge</h3>
+                                    <p>Tone para significado, color para decoração</p>
+                                    <div class="component-preview">
+                                        <span class="preview-badge">Success</span>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="toggle">
+                                    <h3>Toggle</h3>
+                                    <p>Estados binários e nomenclatura clara</p>
+                                    <div class="component-preview">
+                                        <div class="preview-toggle">
+                                            <div class="preview-toggle__track">
+                                                <div class="preview-toggle__thumb"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="card">
+                                    <h3>Card</h3>
+                                    <p>Elevation semântica e slots organizados</p>
+                                    <div class="component-preview">
+                                        <div class="preview-card">
+                                            <div class="preview-card__content">Card</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+
+                                <div class="component-card" data-component="chip">
+                                    <h3>Chip</h3>
+                                    <p>Role define comportamento, appearance define estilo</p>
+                                    <div class="component-preview">
+                                        <span class="preview-chip">Filter</span>
+                                    </div>
+                                    <button class="btn btn--primary btn--sm">Explorar →</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Component Playground Template -->
+            <div class="tab-content" data-content="button">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="button-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="button-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="button-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="button-preview" class="component-render"></div>
+                            </div>
+                        </div>
+
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="button-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="button-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="button-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Playground -->
+            <div class="tab-content" data-content="input">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="input-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="input-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="input-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="input-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="input-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="input-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="input-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badge Playground -->
+            <div class="tab-content" data-content="badge">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="badge-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="badge-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="badge-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="badge-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="badge-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="badge-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="badge-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toggle Playground -->
+            <div class="tab-content" data-content="toggle">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="toggle-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="toggle-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="toggle-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="toggle-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="toggle-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="toggle-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="toggle-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Playground -->
+            <div class="tab-content" data-content="card">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="card-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="card-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="card-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="card-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="card-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="card-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="card-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chip Playground -->
+            <div class="tab-content" data-content="chip">
+                <div class="playground">
+                    <div class="playground__sidebar">
+                        <h3>Controles</h3>
+                        <div class="controls" id="chip-controls"></div>
+                        <div class="practices-section">
+                            <div class="practices-good">
+                                <h4>✅ Boas Práticas</h4>
+                                <ul id="chip-good"></ul>
+                            </div>
+                            <div class="practices-bad">
+                                <h4>❌ Anti-patterns</h4>
+                                <ul id="chip-bad"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="playground__main">
+                        <div class="playground__preview">
+                            <h3>Preview</h3>
+                            <div class="preview-container">
+                                <div id="chip-preview" class="component-render"></div>
+                            </div>
+                        </div>
+                        <div class="playground__code">
+                            <div class="code-header">
+                                <h3>TypeScript Gerado</h3>
+                                <div class="code-actions">
+                                    <button class="btn btn--sm btn--outline" id="chip-reset">Reset</button>
+                                    <button class="btn btn--sm btn--primary" id="chip-copy">Copiar</button>
+                                </div>
+                            </div>
+                            <pre id="chip-code" class="code-display"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
