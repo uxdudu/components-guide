@@ -1,8 +1,38 @@
 {
-  "name": "my-v0-project",
-  "version": "0.1.0",
-  "private": true,
+  "name": "components-guide",
+  "version": "1.0.0",
+  "description": "Guia interativo de boas práticas para design de componentes de UI",
+  "main": "public/index.html",
   "scripts": {
-    "build": "echo 'no build script'"
+    "build": "mkdir -p public && cp index.html app.js style.css public/",
+    "start": "serve . -p 8000",
+    "serve": "npx serve public",
+    "dev": "serve . -p 8000"
+  },
+  "keywords": [
+    "design-system",
+    "ui-components",
+    "best-practices",
+    "design-tokens",
+    "figma",
+    "typescript",
+    "css-variables",
+    "component-library"
+  ],
+  "author": "Eduardo Amaral",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uxdudu/components-guide.git"
+  },
+  "homepage": "https://components-guide.vercel.app",
+  "bugs": {
+    "url": "https://github.com/uxdudu/components-guide/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
   }
 }
