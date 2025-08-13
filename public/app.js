@@ -165,6 +165,12 @@ const componentConfigs = {
         options: ["none", "purple", "orange", "teal"],
         default: "none",
       },
+      size: {
+        type: "select",
+        label: "Size",
+        options: ["xs", "sm", "md", "lg"],
+        default: "md",
+      },
       isPill: {
         type: "boolean",
         label: "Is Pill",
@@ -180,18 +186,27 @@ const componentConfigs = {
         label: "Is Dismissible",
         default: false,
       },
+      hasDot: {
+        type: "boolean",
+        label: "Has Dot",
+        default: false,
+      },
     },
     goodPractices: [
       "Use tone quando há significado semântico",
       "Use color apenas para decoração",
       "isPill é mais claro que rounded",
       "isDismissible descreve comportamento",
+      "hasDot para indicadores visuais",
+      "size para hierarquia visual",
     ],
     badPractices: [
       'Não use color="green" para sucesso',
       'Evite variant="success-green"',
       "Não misture cor com significado",
       "Evite props como canClose, closable",
+      'Não use type="small-green-pill"',
+      "Evite combinar muitas propriedades em uma",
     ],
     render: (props) => {
       const actualColor = props.color !== "none" ? props.color : props.tone
@@ -200,13 +215,26 @@ const componentConfigs = {
         `badge--${actualColor}`,
         `badge--${props.appearance}`,
         props.isPill ? "badge--pill" : "",
+        props.hasDot ? "badge--has-dot" : "",
       ]
         .filter(Boolean)
         .join(" ")
 
-      const icon = props.hasIcon ? "✓ " : ""
-      const dismiss = props.isDismissible ? " ×" : ""
-      const text = `${icon}${props.tone}${dismiss}`
+      const getIcon = () => {
+        if (!props.hasIcon) return ""
+        switch (props.tone) {
+          case "success": return "✓ "
+          case "warning": return "⚠ "
+          case "error": return "✗ "
+          case "info": return "ℹ "
+          default: return "★ "
+        }
+      }
+
+      const dot = props.hasDot ? '<span class="badge__dot"></span>' : ""
+      const icon = getIcon()
+      const dismiss = props.isDismissible ? '<span class="badge__dismiss">×</span>' : ""
+      const text = `${dot}${icon}${props.tone.charAt(0).toUpperCase() + props.tone.slice(1)}${dismiss}`
 
       return `<span class="${classes}">${text}</span>`
     },
