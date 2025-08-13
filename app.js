@@ -678,8 +678,8 @@ const componentsData = {
       "position='top'|'blue' misturado",
       "Props conflitantes para trigger"
     ]
-  };
-}
+  }
+};
 
 // Component states
 const componentStates = {};
