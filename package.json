@@ -4,10 +4,10 @@
   "description": "Guia interativo de boas práticas para design de componentes de UI",
   "main": "public/index.html",
   "scripts": {
-    "build": "echo 'Static site ready - files already in public directory'",
-    "start": "npx serve public -p 8000",
-    "serve": "npx serve public",
-    "dev": "npx serve public -p 8000"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "keywords": [
     "design-system",
