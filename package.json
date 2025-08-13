@@ -4,9 +4,9 @@
   "description": "Guia interativo de boas práticas para design de componentes de UI",
   "main": "index.html",
   "scripts": {
-    "start": "python -m http.server 8000",
+    "start": "serve . -p 8000",
     "serve": "npx serve .",
-    "dev": "python -m http.server 8000"
+    "dev": "serve . -p 8000"
   },
   "keywords": [
     "design-system",
