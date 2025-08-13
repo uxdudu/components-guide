@@ -2,7 +2,6 @@
   "name": "components-guide",
   "version": "1.0.0",
   "description": "Guia interativo de boas práticas para design de componentes de UI",
-  "main": "public/index.html",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
